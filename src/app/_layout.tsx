@@ -67,7 +67,7 @@ function RootLayoutNav() {
     <StreamVideo client={client}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{}} />
         </Stack>
       </ThemeProvider>
