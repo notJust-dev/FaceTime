@@ -1,4 +1,5 @@
 package com.vadinsavin.Facetime;
+import com.streamvideo.reactnative.StreamVideoReactNative;
 
 import android.app.Application;
 import android.content.res.Configuration;
@@ -70,7 +71,8 @@ public class MainApplication extends Application implements ReactApplication {
     }
     ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
     ApplicationLifecycleDispatcher.onApplicationCreate(this);
-  }
+  StreamVideoReactNative.setup();
+}
 
   @Override
   public void onConfigurationChanged(@NonNull Configuration newConfig) {

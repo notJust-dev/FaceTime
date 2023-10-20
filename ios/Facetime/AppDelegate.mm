@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import "StreamVideoReactNative.h"
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
@@ -7,6 +8,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [StreamVideoReactNative setup];
   self.moduleName = @"main";
 
   // You can add your custom initial props in the dictionary below.
