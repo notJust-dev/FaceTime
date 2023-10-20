@@ -1,17 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
+import { View } from '../components/Themed';
+import {
+  CallContent,
+  StreamCall,
+  useStreamVideoClient,
+} from '@stream-io/video-react-native-sdk';
+import { useEffect, useState } from 'react';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+const callId = 'default_72b0a2c7-32af-4af3-b1d1-1eff8abec69a';
 
-export default function ModalScreen() {
+export default function CallScreen() {
+  const client = useStreamVideoClient();
+
+  const [call] = useState(() => client?.call('default', callId));
+
+  useEffect(() => {
+    call?.join({ create: true });
+  }, [call]);
+
+  if (!call) {
+    return <Text>Call not found!</Text>;
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
+      <StreamCall call={call}>
+        <CallContent />
+      </StreamCall>
 
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
   );
@@ -20,8 +37,6 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
