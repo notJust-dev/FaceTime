@@ -1,6 +1,7 @@
 import { useStreamVideoClient } from '@stream-io/video-react-native-sdk';
 import { Stack, router } from 'expo-router';
-import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { Pressable, View, Text, StyleSheet, Button } from 'react-native';
+import { supabase } from '../../lib/supabase';
 
 function genRandomString(length: number) {
   const chars =
@@ -40,6 +41,8 @@ const HomeScreen = () => {
           <Text>Join Call</Text>
         </Pressable>
       </View>
+
+      <Button title="Sign out" onPress={() => supabase.auth.signOut()} />
     </View>
   );
 };

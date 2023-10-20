@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { PermissionsAndroid, Platform, useColorScheme } from 'react-native';
 import { StreamVideo } from '@stream-io/video-react-native-sdk';
 import { client } from '../lib/stream';
+import { AuthProvider } from '../context/AuthProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -64,13 +65,17 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <StreamVideo client={client}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(app)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{}} />
-        </Stack>
-      </ThemeProvider>
-    </StreamVideo>
+    <AuthProvider>
+      <StreamVideo client={client}>
+        <ThemeProvider
+          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+        >
+          <Stack>
+            <Stack.Screen name="(app)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{}} />
+          </Stack>
+        </ThemeProvider>
+      </StreamVideo>
+    </AuthProvider>
   );
 }
