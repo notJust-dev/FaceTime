@@ -2,17 +2,7 @@ import { useStreamVideoClient } from '@stream-io/video-react-native-sdk';
 import { Stack, router } from 'expo-router';
 import { Pressable, View, Text, StyleSheet, Button } from 'react-native';
 import { supabase } from '../../lib/supabase';
-
-function genRandomString(length: number) {
-  const chars =
-    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const charLength = chars.length;
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * charLength));
-  }
-  return result;
-}
+import { genRandomString } from '../../utils';
 
 const HomeScreen = () => {
   const client = useStreamVideoClient();
@@ -39,6 +29,13 @@ const HomeScreen = () => {
 
         <Pressable onPress={() => router.push('/join')} style={styles.button}>
           <Text>Join Call</Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => router.push('/contacts')}
+          style={styles.button}
+        >
+          <Text>Contacts</Text>
         </Pressable>
       </View>
 
