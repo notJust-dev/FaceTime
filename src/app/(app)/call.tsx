@@ -3,6 +3,7 @@ import { ActivityIndicator, Platform, StyleSheet, Text } from 'react-native';
 import { View } from '../../components/Themed';
 import {
   CallContent,
+  RingingCallContent,
   StreamCall,
   useStreamVideoClient,
   useCalls,
@@ -19,25 +20,28 @@ export default function CallScreen() {
   const calls = useCalls();
   const call = calls[0];
 
+  // useEffect(() => {
+  //   if (!call) {
+  //     return router.back();
+  //   }
+  // }, [call]);
+
   // const [call] = useState(() => client?.call('default', callId));
 
   // useEffect(() => {
   //   call?.join({ create: true });
   // }, [call]);
 
-  // if (!call) {
-  //   return <Text>Call not found!</Text>;
-  // }
   if (!call) {
-    return <ActivityIndicator />;
+    return <Text>Call not found!</Text>;
   }
 
   return (
     <View style={styles.container}>
       <StreamCall call={call}>
-        <CallContent
+        <RingingCallContent
           CallTopView={() => <CallTopView title={`ID: ${call.id}`} />}
-          onHangupCallHandler={() => router.back()}
+          // onHangupCallHandler={() => router.back()}
         />
       </StreamCall>
 

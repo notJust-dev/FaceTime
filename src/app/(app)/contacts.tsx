@@ -54,6 +54,11 @@ const ContactsScreen = () => {
           {item.id}
         </Text>
       )}
+      ListHeaderComponent={() => (
+        <Text style={{ margin: 15, fontWeight: 'bold' }}>
+          My id: {session?.user?.id}
+        </Text>
+      )}
     />
   );
 };

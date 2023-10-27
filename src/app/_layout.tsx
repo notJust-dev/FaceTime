@@ -11,6 +11,7 @@ import { PermissionsAndroid, Platform, useColorScheme } from 'react-native';
 import { StreamVideo } from '@stream-io/video-react-native-sdk';
 import { StreamClientProvider } from '../lib/stream';
 import { AuthProvider } from '../context/AuthProvider';
+import { CallsProvider } from '../context/CallsProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -67,13 +68,15 @@ function RootLayoutNav() {
   return (
     <AuthProvider>
       <StreamClientProvider>
-        <ThemeProvider
-          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-        >
-          <Stack>
-            <Stack.Screen name="(app)" options={{ headerShown: false }} />
-          </Stack>
-        </ThemeProvider>
+        <CallsProvider>
+          <ThemeProvider
+            value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+          >
+            <Stack>
+              <Stack.Screen name="(app)" options={{ headerShown: false }} />
+            </Stack>
+          </ThemeProvider>
+        </CallsProvider>
       </StreamClientProvider>
     </AuthProvider>
   );
